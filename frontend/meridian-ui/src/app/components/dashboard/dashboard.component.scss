@@ -1,0 +1,76 @@
+.dashboard { display: flex; flex-direction: column; gap: 24px; }
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+  background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%);
+  color: white;
+  border: none;
+
+  h1    { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+  p     { font-size: 15px; opacity: 0.9; margin-bottom: 20px; line-height: 1.6; max-width: 500px; }
+
+  .btn-primary {
+    background: white;
+    color: var(--blue);
+    &:hover { background: #e8f0fe; }
+  }
+}
+
+.hero-stats {
+  display: flex;
+  gap: 32px;
+  .stat {
+    text-align: center;
+    .stat-value { display: block; font-size: 32px; font-weight: 700; }
+    .stat-label { font-size: 13px; opacity: 0.85; }
+  }
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--dark);
+  margin-top: 8px;
+}
+
+.models-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.model-card {
+  text-align: center;
+  .model-icon { font-size: 36px; margin-bottom: 12px; }
+  h3          { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+  p           { font-size: 14px; color: var(--gray); line-height: 1.5; margin-bottom: 12px; }
+  .model-tag  { display: inline-block; background: #e8f0fe; color: var(--blue);
+                padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 500; }
+}
+
+.jobs-list {
+  padding: 0;
+  .job-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.15s;
+    &:last-child { border-bottom: none; }
+    &:hover      { background: var(--light-gray); }
+  }
+  .job-id     { font-weight: 600; font-size: 14px; margin-right: 12px; }
+  .job-tenant { font-size: 13px; color: var(--gray); }
+}
+
+.empty-state {
+  color: var(--gray);
+  text-align: center;
+  padding: 16px 0;
+  a { color: var(--blue); text-decoration: none; }
+}

@@ -1,0 +1,10 @@
+[
+  {"name": "job_id",       "type": "STRING",    "mode": "REQUIRED"},
+  {"name": "tenant_id",    "type": "STRING",    "mode": "REQUIRED"},
+  {"name": "ds",           "type": "DATE",      "mode": "REQUIRED"},
+  {"name": "yhat",         "type": "FLOAT64",   "mode": "REQUIRED"},
+  {"name": "yhat_lower",   "type": "FLOAT64",   "mode": "REQUIRED"},
+  {"name": "yhat_upper",   "type": "FLOAT64",   "mode": "REQUIRED"},
+  {"name": "model_used",   "type": "STRING",    "mode": "REQUIRED"},
+  {"name": "created_at",   "type": "TIMESTAMP", "mode": "REQUIRED"}
+]

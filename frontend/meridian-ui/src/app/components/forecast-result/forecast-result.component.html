@@ -1,0 +1,88 @@
+<div class="result-page">
+
+  <!-- Loading -->
+  <div class="card loading-card" *ngIf="isLoading">
+    <div class="loading-spinner">🔮</div>
+    <h2>Running Forecast...</h2>
+    <p>Meridian is benchmarking Prophet, ARIMA, and LSTM on your data</p>
+    <mat-progress-bar mode="indeterminate" color="primary"></mat-progress-bar>
+    <div class="loading-steps">
+      <span>⏳ Running Prophet...</span>
+      <span>⏳ Running ARIMA...</span>
+      <span>⏳ Running LSTM...</span>
+      <span>🏆 Selecting best model...</span>
+    </div>
+  </div>
+
+  <!-- Error -->
+  <div class="card error-card" *ngIf="!isLoading && errorMsg">
+    <h2>❌ Something went wrong</h2>
+    <p>{{ errorMsg }}</p>
+    <button class="btn-primary" routerLink="/upload">Try Again</button>
+  </div>
+
+  <!-- Result -->
+  <div *ngIf="!isLoading && result">
+
+    <!-- Header -->
+    <div class="result-header card">
+      <div class="result-title">
+        <h1>✅ Forecast Complete</h1>
+        <p>Job ID: <strong>{{ result.jobId }}</strong></p>
+      </div>
+      <div class="winner-badge">
+        <span class="winner-label">Best Model</span>
+        <span class="winner-name">{{ result.modelUsed.toUpperCase() }}</span>
+      </div>
+    </div>
+
+    <!-- Model scores -->
+    <div class="scores-grid">
+      <div class="score-card card" *ngFor="let model of modelScores"
+           [class.winner]="model.name.toLowerCase() === result.modelUsed.toLowerCase()">
+        <div class="score-icon">{{ model.icon }}</div>
+        <div class="score-name">{{ model.name }}</div>
+        <div class="score-mae">MAE: {{ model.mae.toFixed(2) }}</div>
+        <div class="score-winner" *ngIf="model.name.toLowerCase() === result.modelUsed.toLowerCase()">
+          🏆 Selected
+        </div>
+      </div>
+    </div>
+
+    <!-- Chart -->
+    <div class="card chart-card">
+      <h2>Forecast Chart</h2>
+<p class="chart-subtitle">Forecast with 95% confidence interval</p>      <canvas id="forecastChart"></canvas>
+    </div>
+
+    <!-- Table -->
+    <div class="card table-card">
+      <h2>Forecast Data</h2>
+      <table class="forecast-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Predicted</th>
+            <th>Lower Bound</th>
+            <th>Upper Bound</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of tableData">
+            <td>{{ row.date }}</td>
+            <td class="pred">{{ row.prediction | number:'1.1-1' }}</td>
+            <td class="lower">{{ row.lower | number:'1.1-1' }}</td>
+            <td class="upper">{{ row.upper | number:'1.1-1' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Actions -->
+    <div class="actions">
+      <button class="btn-secondary" routerLink="/">← Back to Dashboard</button>
+      <button class="btn-primary" routerLink="/upload">New Forecast</button>
+    </div>
+
+  </div>
+</div>

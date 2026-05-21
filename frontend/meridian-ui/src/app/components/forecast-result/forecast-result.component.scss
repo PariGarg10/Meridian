@@ -1,0 +1,83 @@
+.result-page { display: flex; flex-direction: column; gap: 24px; }
+
+.loading-card {
+  text-align: center;
+  padding: 48px;
+  .loading-spinner { font-size: 48px; margin-bottom: 16px; animation: pulse 1.5s infinite; }
+  h2  { font-size: 22px; margin-bottom: 8px; }
+  p   { color: var(--gray); margin-bottom: 24px; }
+  .loading-steps {
+    display: flex; flex-direction: column; gap: 8px;
+    margin-top: 24px; color: var(--gray); font-size: 14px;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1);    opacity: 1;   }
+  50%       { transform: scale(1.1); opacity: 0.7; }
+}
+
+.result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  h1 { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+  p  { color: var(--gray); font-size: 14px; }
+}
+
+.winner-badge {
+  text-align: center;
+  background: linear-gradient(135deg, #1a73e8, #0d47a1);
+  color: white;
+  padding: 16px 24px;
+  border-radius: 12px;
+  .winner-label { display: block; font-size: 12px; opacity: 0.85; margin-bottom: 4px; }
+  .winner-name  { display: block; font-size: 24px; font-weight: 700; }
+}
+
+.scores-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  .score-card {
+    text-align: center;
+    padding: 20px;
+    transition: transform 0.2s;
+    &.winner { border-color: var(--blue); box-shadow: 0 0 0 2px var(--blue); }
+    .score-icon   { font-size: 28px; margin-bottom: 8px; }
+    .score-name   { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+    .score-mae    { font-size: 14px; color: var(--gray); margin-bottom: 8px; }
+    .score-winner { font-size: 13px; color: var(--blue); font-weight: 600; }
+  }
+}
+
+.chart-card {
+  h2              { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
+  .chart-subtitle { color: var(--gray); font-size: 14px; margin-bottom: 20px; }
+}
+
+.table-card {
+  h2 { font-size: 18px; font-weight: 600; margin-bottom: 16px; }
+  .forecast-table {
+    width: 100%; border-collapse: collapse;
+    th, td { padding: 10px 16px; text-align: left; font-size: 14px; border-bottom: 1px solid var(--border); }
+    th     { background: #f8f9fa; font-weight: 600; color: var(--gray); }
+    .pred  { font-weight: 600; color: var(--blue); }
+    .lower { color: #d93025; }
+    .upper { color: var(--green); }
+    tr:hover td { background: #f8f9fa; }
+  }
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.error-card {
+  text-align: center;
+  padding: 48px;
+  h2 { margin-bottom: 12px; }
+  p  { color: var(--gray); margin-bottom: 24px; }
+}

@@ -1,0 +1,54 @@
+<div class="dashboard">
+
+  <!-- Hero -->
+  <div class="hero card">
+    <div class="hero-text">
+      <h1>Welcome to Meridian</h1>
+      <p>Self-serve ML forecasting platform. Upload your time-series data and get production-grade forecasts in minutes — no ML knowledge required.</p>
+      <button class="btn-primary" routerLink="/upload">
+        + New Forecast
+      </button>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-value">3</span>
+        <span class="stat-label">ML Models</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">Auto</span>
+        <span class="stat-label">Model Selection</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">95%</span>
+        <span class="stat-label">Confidence Bands</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Models info -->
+  <h2 class="section-title">Available Models</h2>
+  <div class="models-grid">
+    <div class="model-card card" *ngFor="let model of models">
+      <div class="model-icon">{{ model.icon }}</div>
+      <h3>{{ model.name }}</h3>
+      <p>{{ model.description }}</p>
+      <div class="model-tag">{{ model.bestFor }}</div>
+    </div>
+  </div>
+
+  <!-- Recent jobs -->
+  <h2 class="section-title">Recent Jobs</h2>
+  <div class="card" *ngIf="recentJobs.length === 0">
+    <p class="empty-state">No forecasts yet. <a routerLink="/upload">Create your first one →</a></p>
+  </div>
+  <div class="jobs-list card" *ngIf="recentJobs.length > 0">
+    <div class="job-row" *ngFor="let job of recentJobs" [routerLink]="['/result', job.jobId]">
+      <div class="job-info">
+        <span class="job-id">{{ job.jobId }}</span>
+        <span class="job-tenant">{{ job.tenantId }}</span>
+      </div>
+      <span class="status-badge {{ job.status.toLowerCase() }}">{{ job.status }}</span>
+    </div>
+  </div>
+
+</div>
