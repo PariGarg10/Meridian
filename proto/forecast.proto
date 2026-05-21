@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package meridian;
+
+option java_package = "com.meridian.proto";
+option java_outer_classname = "ForecastProto";
+
+// ─── Main Service ────────────────────────────────────────────────
+
+service ForecastService {
+  // Submit a new forecast job
+  rpc SubmitForecastJob (ForecastRequest) returns (JobResponse);
+
+  // Check job status
+  rpc GetJobStatus (JobID) returns (JobStatusResponse);
+
+  // Get completed forecast result
+  rpc GetForecastResult (JobID) returns (ForecastResult);
+}
+
+// ─── Request / Response Messages ─────────────────────────────────
+
+message ForecastRequest {
+  string tenant_id    = 1;  // which team is requesting
+  string dataset_ref  = 2;  // BigQuery table or GCS path
+  int32  horizon_days = 3;  // how many days to forecast
+}
+
+message JobID {
+  string job_id = 1;
+}
+
+message JobResponse {
+  string job_id  = 1;
+  string status  = 2;  // PENDING | RUNNING | DONE | FAILED
+}
+
+message JobStatusResponse {
+  string job_id     = 1;
+  string status     = 2;
+  string model_used = 3;
+  string error_msg  = 4;
+}
+
+message ForecastResult {
+  string          job_id      = 1;
+  string          model_used  = 2;
+  repeated string dates       = 3;  // ISO date strings
+  repeated double predictions = 4;  // yhat
+  repeated double upper_bound = 5;  // yhat_upper
+  repeated double lower_bound = 6;  // yhat_lower
+  ModelScores     scores      = 7;  // all 3 model scores for transparency
+}
+
+message ModelScores {
+  double prophet_mae = 1;
+  double arima_mae   = 2;
+  double lstm_mae    = 3;
+}
